@@ -12,7 +12,7 @@ const UserSection: React.FC<UserSectionProps> = ({
   children
 }) => {
   return (
-    <Card>
+    <Card style={{marginBottom: 35}}>
       <UserSectionTitle> {title} </UserSectionTitle>
       { children }
     </Card>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Main, Row } from '../../components/Layout';
 import About from './About';
+import Knowledge from './Knowledge';
 import { BackgroundCover, UserImage, UserName, UserRole } from './styles';
 
 const UserDetails: React.FC = () => {
@@ -14,6 +15,7 @@ const UserDetails: React.FC = () => {
       <Main>
         <Row>
           <About/>
+          <Knowledge/>
         </Row>
       </Main>
     </>
