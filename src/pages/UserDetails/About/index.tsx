@@ -11,6 +11,7 @@ import { AboutSchema } from './schema';
 import { AboutGroup, MinusButton, PlusButton } from './styles';
 import * as yup from 'yup';
 import getValidationErrors from '../../../utils/getValidationErros';
+import { UsuarioService } from '../../../services/UsuarioService';
 
 const About: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
@@ -19,7 +20,11 @@ const About: React.FC = () => {
 
   const handleSubmit = async (data: any) => {
     try {
-      await AboutSchema.validate(data, {abortEarly: false});
+      data.nome = 'Bruno Cunha';
+      data.ocupacao = 'Bruno Cunha';
+      const schema: any = await AboutSchema.validate(data, {abortEarly: false});
+      UsuarioService.saveUsuario(data.nome, schema);
+      setEditMode(false);
     } catch (err) {
       if (err instanceof yup.ValidationError) {
         formRef.current?.setErrors(getValidationErrors(err));
