@@ -9,6 +9,7 @@ export const InputStyle = styled.input`
   border-radius: 0;
   padding-left: 0;
   border-bottom: 1px solid ${colors.primary};
+  margin-bottom: 5px;
   
   &:disabled {
     border: none;

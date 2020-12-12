@@ -13,4 +13,6 @@ export const EditButton = styled.button`
   position: absolute;
   right: 25px;
   top: 55px;
+  border: none;
+  background: none;
 `;

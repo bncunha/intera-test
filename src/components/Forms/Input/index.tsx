@@ -4,7 +4,7 @@ import { FormError, InputStyle } from '..';
 
 interface InputProps {
   name: string,
-  rest?: any;
+  id?: string,
 }
 
 const Input: React.FC<InputProps> = ({ name, ...rest }) => {
