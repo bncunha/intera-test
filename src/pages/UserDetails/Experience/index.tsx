@@ -4,7 +4,7 @@ import UserSection from '../UserSection';
 
 const Experience: React.FC = () => {
   return (
-    <UserSection title="Experiências">
+    <UserSection title="Experiências" onEdit={() => {}}>
       <Timeline/>
     </UserSection>
   )

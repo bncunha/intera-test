@@ -6,7 +6,7 @@ import { AboutGroup } from './styles';
 const About: React.FC = () => {
   
   return (   
-    <UserSection title="Sobre">
+    <UserSection title="Sobre" onEdit={() => {}}>
       <p> Estou sempre disposto a aprender novas tecnologias, aprecio o compartilhamento de conhecimento, experiências e o trabalho em equipe. Possuo experiência com Web Development, comunicação cliente-servidor, design de interfaces e web components. Utilizando linguagens e tecnologias como javascript (Node.js e Angular2+), Java, banco de dados MySQL e SQL Server.  </p>
       <AboutGroup>
         <Label> E-mail </Label>

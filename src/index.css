@@ -25,3 +25,9 @@ code {
 p {
   margin-top: 0;
 }
+
+button:not(:disabled) {
+  cursor: pointer;
+  border: none;
+  background: none;
+}

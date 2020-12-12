@@ -6,7 +6,7 @@ import { KnowledgeGroup } from './styles';
 
 const Knowledge: React.FC = () => {
   return (
-    <UserSection title="Conhecimentos">
+    <UserSection title="Conhecimentos" onEdit={() => {}}>
       <KnowledgeGroup>
         <Label> Javascript </Label>
         <Progress percent={80}/>
