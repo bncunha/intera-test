@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import BackgroundProfile from '../../assets/profile_background.png';
 import { Title1 } from '../../components/Texts';
+import breakpoints from '../../styles/breakpoints';
 
 export const BackgroundCover = styled.div`
   width: 100%;
@@ -30,3 +31,11 @@ export const UserRole = styled.p`
   text-align: center;
   margin-bottom: 35px;
 `;
+
+export const InfoContainer = styled.div`
+  flex-basis: 100%;
+
+  @media(min-width: ${breakpoints.lg}px) {
+    flex-basis: 48%
+  }
+`

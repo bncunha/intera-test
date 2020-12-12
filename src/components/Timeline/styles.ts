@@ -24,10 +24,10 @@ export const TimelineNode = styled.div`
 
   &:last-child::after {
     content: "";
-    width: 4px;
+    width: 6px;
     position: absolute;
     bottom: -15px;
-    left: -3px;
+    left: -4px;
     height: 100%;
     border-radius: 0;
     background: #fff;
