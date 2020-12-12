@@ -9,7 +9,7 @@ interface InputProps {
 
 const Input: React.FC<InputProps> = ({ name, ...rest }) => {
   const inputRef = useRef(null);
-  const { fieldName, defaultValue, registerField, error } = useField(name);
+  const { fieldName, defaultValue, registerField, error, clearError } = useField(name);
 
   useEffect(() => {
     registerField({
@@ -20,10 +20,10 @@ const Input: React.FC<InputProps> = ({ name, ...rest }) => {
   }, [fieldName, registerField]);
 
   return (
-    <>
-      <InputStyle ref={inputRef} defaultValue={defaultValue} {...rest} />
+    <div>
+      <InputStyle ref={inputRef} defaultValue={defaultValue} {...rest} onFocus={clearError}/>
       { !!error && <FormError> { error } </FormError>}
-    </>
+    </div>
   );
 };
 

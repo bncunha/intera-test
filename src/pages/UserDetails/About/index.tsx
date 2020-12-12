@@ -7,24 +7,29 @@ import { Button, ButtonsGroup } from '../../../components/Forms/Button';
 import Input from '../../../components/Forms/Input';
 import { Row } from '../../../components/Layout';
 import UserSection from '../UserSection';
+import { AboutSchema } from './schema';
 import { AboutGroup, MinusButton, PlusButton } from './styles';
+import * as yup from 'yup';
+import getValidationErrors from '../../../utils/getValidationErros';
 
 const About: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [qtdSites, setQtdSites] = useState<number>(0);
 
-  const handleSubmit = (data: any) => {
+  const handleSubmit = async (data: any) => {
     try {
-      console.log(data);
+      await AboutSchema.validate(data, {abortEarly: false});
     } catch (err) {
-
+      if (err instanceof yup.ValidationError) {
+        formRef.current?.setErrors(getValidationErrors(err));
+      }      
     };
   };
   
   return (
     <UserSection title="Sobre" onEdit={() => setEditMode(true)}>
-      <Form ref={formRef} onSubmit={handleSubmit} initialData={{sites: []}}>
+      <Form ref={formRef} onSubmit={handleSubmit}>
         <Fieldset disabled={!editMode}>
           <p> Estou sempre disposto a aprender novas tecnologias, aprecio o compartilhamento de conhecimento, experiências e o trabalho em equipe. Possuo experiência com Web Development, comunicação cliente-servidor, design de interfaces e web components. Utilizando linguagens e tecnologias como javascript (Node.js e Angular2+), Java, banco de dados MySQL e SQL Server.  </p>
           <AboutGroup>
