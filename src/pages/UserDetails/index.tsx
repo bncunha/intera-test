@@ -1,6 +1,7 @@
 import React from 'react';
 import { Main, Row } from '../../components/Layout';
 import About from './About';
+import Experience from './Experience';
 import Knowledge from './Knowledge';
 import { BackgroundCover, UserImage, UserName, UserRole } from './styles';
 
@@ -16,6 +17,7 @@ const UserDetails: React.FC = () => {
         <Row>
           <About/>
           <Knowledge/>
+          <Experience/>
         </Row>
       </Main>
     </>
