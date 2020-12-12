@@ -9,13 +9,15 @@ const Knowledge: React.FC = () => {
     <UserSection title="Conhecimentos">
       <KnowledgeGroup>
         <Label> Javascript </Label>
-        <Progress percent={10}/>
+        <Progress percent={80}/>
       </KnowledgeGroup>
       <KnowledgeGroup>
         <Label> Javascript </Label>
+        <Progress percent={70}/>
       </KnowledgeGroup>
       <KnowledgeGroup>
         <Label> Javascript </Label>
+        <Progress percent={75}/>
       </KnowledgeGroup>
     </UserSection>
   )
