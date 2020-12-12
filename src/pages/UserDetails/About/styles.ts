@@ -11,3 +11,10 @@ export const PlusButton = styled.button`
   background: none;
   border: none;
 `;
+
+export const MinusButton = styled.button`
+  font-size: 15px;
+  color: ${colors.title};
+  background: none;
+  border: none;
+`;

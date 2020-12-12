@@ -1,12 +1,13 @@
-import { FormHandles, Scope } from '@unform/core';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import React, { useRef, useState } from 'react';
-import { FaPlus } from 'react-icons/fa';
+import { FaMinusSquare, FaPlusSquare } from 'react-icons/fa';
 import { Fieldset, Label } from '../../../components/Forms';
 import { Button, ButtonsGroup } from '../../../components/Forms/Button';
 import Input from '../../../components/Forms/Input';
+import { Row } from '../../../components/Layout';
 import UserSection from '../UserSection';
-import { AboutGroup, PlusButton } from './styles';
+import { AboutGroup, MinusButton, PlusButton } from './styles';
 
 const About: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
@@ -32,10 +33,18 @@ const About: React.FC = () => {
           </AboutGroup>
           <AboutGroup>
             <Label style={{display: 'inline-block'}}> Sites </Label>
-            { editMode && <PlusButton onClick={() => setQtdSites(qtdSites + 1)}> <FaPlus/> </PlusButton> }
+            { editMode && <PlusButton onClick={() => setQtdSites(qtdSites + 1)} type="button" title="Adicionar site"> <FaPlusSquare/> </PlusButton> }
             {
               [...Array(qtdSites)].map((value: any, index: number) => (
-                <Input name={`sites[${index}]`} key={index}/>
+                <Row noWrap key={index}>
+                  <Input name={`sites[${index}]`}/>
+                  {
+                    editMode && qtdSites === index + 1 &&
+                    <MinusButton type="button" title="Remover site" onClick={() => setQtdSites(qtdSites - 1)}> 
+                      <FaMinusSquare/> 
+                    </MinusButton>
+                  }   
+                </Row>
               ))
             }
           </AboutGroup>
