@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, Main, Row } from '../../components/Layout';
+import { Main, Row } from '../../components/Layout';
+import About from './About';
 import { BackgroundCover, UserImage, UserName, UserRole } from './styles';
 
 const UserDetails: React.FC = () => {
@@ -12,9 +13,7 @@ const UserDetails: React.FC = () => {
 
       <Main>
         <Row>
-          <Card>
-            fwefji
-          </Card>
+          <About/>
         </Row>
       </Main>
     </>

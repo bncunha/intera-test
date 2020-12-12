@@ -10,3 +10,9 @@ export const Title1 = styled.h1<TitleProps>`
   font-size: 36px;
   color: ${props => props.color || colors.title}
 `;
+
+export const Title2 = styled.h2<TitleProps>`
+  font-weight: 600;
+  font-size: 24px;
+  color: ${props => props.color || colors.title}
+`;

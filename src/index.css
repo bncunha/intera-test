@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
 
-html, body {
+html {
   height: 100%;
 }
 
@@ -13,6 +13,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #E5E5E5;
   color: #7A7A7A;
+  line-height: 28px;
+  padding-bottom: 20px;
 }
 
 code {
