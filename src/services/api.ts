@@ -4,7 +4,7 @@ export interface Conhecimento {
 }
 
 export interface Experiencia {
-  nome: string;
+  ocupacao: string;
   empresa: string;
   dataInicio: Date;
   dataFim: Date;

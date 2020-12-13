@@ -1,6 +1,5 @@
 import { FormHandles, Scope } from '@unform/core';
 import { Form } from '@unform/web';
-import { type } from 'os';
 import React, { useRef, useState } from 'react';
 import { FaMinusSquare, FaPlusSquare } from 'react-icons/fa';
 import { Label } from '../../../components/Forms';
