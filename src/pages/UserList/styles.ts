@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Card } from '../../components/Layout';
 import colors from '../../styles/colors';
 
 export const UserCardContainer = styled.div`
@@ -21,3 +22,14 @@ export const UserSearch = styled.input`
   font-size: 23px;
   text-align: center;
 `; 
+
+export const AddUserCard = styled(Card) `
+  height: 280px;
+`;
+
+export const PlusIconContainer = styled.div`
+  font-size: 53px;
+  margin: auto;
+  width: fit-content;
+  margin-top: 40px;
+`;

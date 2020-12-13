@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { FaPlus } from 'react-icons/fa';
 import {  Main, Row } from '../../components/Layout';
+import { Title2 } from '../../components/Texts';
 import { Usuario } from '../../services/api';
 import { UsuarioService } from '../../services/UsuarioService';
-import { UserCardContainer, UserSearch } from './styles';
+import { AddUserCard, PlusIconContainer, UserCardContainer, UserSearch } from './styles';
 import UserCard from './UserCard';
 
 const UserList: React.FC = () => {
@@ -27,6 +29,13 @@ const UserList: React.FC = () => {
     <Main style={{paddingTop: 10}}>
       <UserSearch placeholder="Buscar por talentos..." onChange={(ev) => filterByName(ev.target.value)}/>
       <Row style={{justifyContent: 'center'}}>
+        <UserCardContainer>
+          <AddUserCard>
+            <PlusIconContainer> <FaPlus/> </PlusIconContainer>
+            <Title2 style={{textAlign: 'center'}}> Adicionar novo Usuário </Title2>
+          </AddUserCard>
+        </UserCardContainer>
+    
         {
           usersFiltered.map((user) => (
             <UserCardContainer>
