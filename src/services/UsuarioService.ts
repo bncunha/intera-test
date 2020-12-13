@@ -22,4 +22,8 @@ export const UsuarioService = {
       index: Api.get().findIndex(findFunction),
     }
   },
+
+  getAll: () => {
+    return Api.get();
+  }
 };
