@@ -20,6 +20,7 @@ export const Card = styled.div`
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.16);
   padding: 28px;
   max-width: 100%;
+  height: 280px;
   position: relative;
 `;
 

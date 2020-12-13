@@ -13,6 +13,7 @@ export interface Experiencia {
 
 export interface Usuario {
   nome: string;
+  imagem: string;
   ocupacao: string;
   sobre: string;
   email: string,
