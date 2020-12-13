@@ -9,7 +9,7 @@ import { Row } from '../../../components/Layout';
 import Popup from '../../../components/Popup';
 import { Title2 } from '../../../components/Texts';
 import Timeline from '../../../components/Timeline';
-import { Experiencia, Usuario } from '../../../services/api';
+import { Experiencia, Usuario } from '../../../services/database';
 import { MinusButton, PlusButton } from '../About/styles';
 import UserSection from '../UserSection';
 import * as yup from 'yup';

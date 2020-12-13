@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import Api from './services/api';
+import { Database } from './services/database';
 import Routes from './routes';
 
 function App() {
 
-  Api.init();
+  Database.init();
 
   return (
     <div className="App">

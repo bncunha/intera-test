@@ -1,5 +1,5 @@
 import React from 'react';
-import { Experiencia } from '../../services/api';
+import { Experiencia } from '../../services/database';
 import { TimelineDescription, TimelineInfo, TimelineNode, TimelineTitle, TimelineWrapper } from './styles';
 
 interface TimelineProps {

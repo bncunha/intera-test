@@ -6,7 +6,7 @@ import Knowledge from './Knowledge';
 import { BackgroundCover, InfoContainer, UserImage, UserName, UserRole } from './styles';
 import { useParams, useHistory } from "react-router-dom";
 import { UsuarioService } from '../../services/UsuarioService';
-import { Usuario } from '../../services/api';
+import { Usuario } from '../../services/database';
 
 interface UserDetailsParams {
   name: string;

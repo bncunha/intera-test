@@ -2,7 +2,6 @@ import React, { ReactNode } from 'react';
 import { Card } from '../../../components/Layout';
 import { EditButton, UserSectionTitle } from './styles';
 import { FaEdit } from 'react-icons/fa';
-import { Fieldset } from '../../../components/Forms';
 
 interface UserSectionProps {
   title: string;

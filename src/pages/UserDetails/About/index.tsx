@@ -12,7 +12,7 @@ import { AboutGroup, MinusButton, PlusButton } from './styles';
 import * as yup from 'yup';
 import getValidationErrors from '../../../utils/getValidationErros';
 import { UsuarioService } from '../../../services/UsuarioService';
-import { Usuario } from '../../../services/api';
+import { Usuario } from '../../../services/database';
 
 interface AboutProps {
   user: Usuario;

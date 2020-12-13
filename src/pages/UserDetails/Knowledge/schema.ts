@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { Conhecimento } from '../../../services/api';
+import { Conhecimento } from '../../../services/database';
 
 export const KnowledgeSchema = yup.object().shape({
   conhecimentos: yup.array().of(yup.object().shape({

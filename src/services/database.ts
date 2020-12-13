@@ -22,10 +22,10 @@ export interface Usuario {
   experiencias: Experiencia[]
 }
 
-const Api = {
+export const Database = {
   init: () => {
-    if (!Api.get()) {
-      Api.save([]);
+    if (!Database.get()) {
+      Database.save([]);
     }
   },
 
@@ -38,5 +38,3 @@ const Api = {
   }
 
 };
-
-export default Api;
