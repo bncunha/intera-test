@@ -46,3 +46,7 @@ button:not(:disabled) {
 .ReactModal__Overlay--before-close{
   opacity: 0;
 }
+
+.ml-3 {
+  margin-left: 1.5em;
+}

@@ -21,6 +21,11 @@
   padding: 20px;
 }
 
+.childrenContent {
+  max-height: 55vh;
+  overflow: auto;
+}
+
 .small {
   max-width: 250px;
   margin: auto;

@@ -35,9 +35,9 @@ const Popup: React.FC<PopupProps> = ({
 
   const renderSaveButtons = () => (
     <ButtonsGroup>
-      <Row noWrap style={{justifyContent: 'space-between'}}>
+      <Row noWrap>
         <Button type="submit" onClick={onConfirmClick}> Salvar </Button>
-        <Button style={{marginLeft: 5}} type="button" onClick={onDenyClick}> Cancelar </Button>
+        <Button style={{marginLeft: 5}} template="secondary" type="button" onClick={onDenyClick}> Cancelar </Button>
       </Row>
     </ButtonsGroup>
   );
@@ -55,7 +55,7 @@ const Popup: React.FC<PopupProps> = ({
           <FaTimes className={style.closeIcon}/>
         </button>
       </div>
-      <div>
+      <div className={style.childrenContent}>
         {props.children}
       </div>
 
