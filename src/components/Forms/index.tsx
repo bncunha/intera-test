@@ -26,6 +26,7 @@ export const Label = styled.label`
 
 export const FormError = styled.small`
   color: red;
+  display: block;
 `;
 
 export const Fieldset = styled.fieldset`

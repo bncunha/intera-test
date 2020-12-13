@@ -15,6 +15,8 @@ import UserSection from '../UserSection';
 import * as yup from 'yup';
 import getValidationErrors from '../../../utils/getValidationErros';
 import DatePicker from '../../../components/Forms/Datepicker';
+import { ExperienceSchema } from './schema';
+import { UsuarioService } from '../../../services/UsuarioService';
 
 const Experience: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
@@ -22,14 +24,13 @@ const Experience: React.FC = () => {
   const [qtdItems, setQtdItems] = useState<number>(1);
 
   const handleSubmit = async (data: {experiencias?: Experiencia[]}) => {
-    console.log(data);
     try {
       if (Object.keys(data).length === 0) {
         data.experiencias = [];
       }
       formRef.current?.setErrors({});
-      // const schema: any = await KnowledgeSchema.validate(data, {abortEarly: false});
-      // UsuarioService.saveUsuario('Bruno Cunha', schema);
+      const schema: any = await ExperienceSchema.validate(data, {abortEarly: false});
+      UsuarioService.saveUsuario('Bruno Cunha', schema);
     } catch (err) {
       if (err instanceof yup.ValidationError) {
         formRef.current?.setErrors(getValidationErrors(err))

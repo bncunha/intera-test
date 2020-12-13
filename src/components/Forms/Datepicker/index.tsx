@@ -11,7 +11,7 @@ interface DatePickerProps extends Omit<ReactDatePickerProps, 'onChange'> {
 
 const DatePicker: React.FC<DatePickerProps> = ({ name, ...rest }) => {
   const datepickerRef = useRef(null);
-  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const { fieldName, registerField, defaultValue, error, clearError } = useField(name);
   const [date, setDate] = useState(defaultValue || null);
 
   useEffect(() => {
@@ -34,6 +34,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ name, ...rest }) => {
         locale={ptBR}
         customInput={<InputStyle/>}
         dateFormat={'dd/MM/yyyy'}
+        onFocus={clearError}
         {...rest}
       />
       { !!error && <FormError> { error } </FormError>}
