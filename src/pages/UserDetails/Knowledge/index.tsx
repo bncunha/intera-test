@@ -1,6 +1,6 @@
 import { FormHandles, Scope } from '@unform/core';
 import { Form } from '@unform/web';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FaMinusSquare, FaPlusSquare } from 'react-icons/fa';
 import { Label } from '../../../components/Forms';
 import { Button, ButtonsGroup } from '../../../components/Forms/Button';
@@ -16,12 +16,21 @@ import * as yup from 'yup';
 import getValidationErrors from '../../../utils/getValidationErros';
 import { KnowledgeSchema } from './schema';
 import { UsuarioService } from '../../../services/UsuarioService';
-import { Conhecimento } from '../../../services/api';
+import { Conhecimento, Usuario } from '../../../services/api';
 
-const Knowledge: React.FC = () => {
+interface KnowledgeProps {
+  user: Usuario;
+}
+
+const Knowledge: React.FC<KnowledgeProps> = ({
+  user
+}) => {
   const formRef = useRef<FormHandles>(null);
+  const [userState, setUserState] = useState<any>(user);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [qtdItems, setQtdItems] = useState<number>(1);
+  const [qtdItems, setQtdItems] = useState<number>(0);
+  const [arrayItems, setArrayItems] = useState<any[]>([]);
+  const [conhecimentos, setConhecimentos] = useState<Conhecimento[]>(user.conhecimentos);
 
   const handleSubmit = async (data: {conhecimentos?: Conhecimento[]}) => {
     try {
@@ -30,7 +39,10 @@ const Knowledge: React.FC = () => {
       }
       formRef.current?.setErrors({});
       const schema: any = await KnowledgeSchema.validate(data, {abortEarly: false});
-      UsuarioService.saveUsuario('Bruno Cunha', schema);
+      setIsOpen(false);
+      UsuarioService.saveUsuario(userState.nome, schema);
+      setConhecimentos(UsuarioService.findByName(userState.nome).value?.conhecimentos || []);
+      setUserState(UsuarioService.findByName(userState.nome).value);
     } catch (err) {
       if (err instanceof yup.ValidationError) {
         formRef.current?.setErrors(getValidationErrors(err))
@@ -41,7 +53,22 @@ const Knowledge: React.FC = () => {
   const handleCancel = () => {
     setIsOpen(false);
     formRef.current?.setErrors({});
-  }
+  };
+
+  useEffect(() => {
+    if (userState.conhecimentos) {
+      setQtdItems(userState.conhecimentos.length)
+    }
+  }, [userState.conhecimentos, user.conhecimentos])
+
+  useEffect(() => {
+    setArrayItems([...Array(qtdItems)]);
+  }, [qtdItems])
+
+  useEffect(() => {
+    setUserState(user);
+    setConhecimentos(user.conhecimentos);
+  }, [user])
 
   const renderFormPopup = () => (
     <Popup isOpen={isOpen} onRequestClose={handleCancel}>
@@ -49,9 +76,9 @@ const Knowledge: React.FC = () => {
         <Title2 style={{fontSize: 18}}> Conhecimentos </Title2>
         <PlusButton type="button" onClick={() => setQtdItems(qtdItems + 1)}> <FaPlusSquare/> </PlusButton>
       </Row>
-      <Form ref={formRef} onSubmit={handleSubmit}>
+      <Form ref={formRef} onSubmit={handleSubmit} initialData={{conhecimentos: userState.conhecimentos}}>
         {
-          [...Array(qtdItems)].map((value: any, index: number) => (
+          arrayItems?.map((value: any, index: number) => (
             <Scope path={`conhecimentos[${index}]`} key={index}>
               <Row noWrap style={{marginBottom: 10}}>
                 <div>
@@ -85,18 +112,14 @@ const Knowledge: React.FC = () => {
     <>
       { renderFormPopup() }      
       <UserSection title="Conhecimentos" onEdit={() => setIsOpen(true)}>
-        <KnowledgeGroup>
-          <Label> Javascript </Label>
-          <Progress percent={80}/>
-        </KnowledgeGroup>
-        <KnowledgeGroup>
-          <Label> Javascript </Label>
-          <Progress percent={70}/>
-        </KnowledgeGroup>
-        <KnowledgeGroup>
-          <Label> Javascript </Label>
-          <Progress percent={75}/>
-        </KnowledgeGroup>
+        {
+          conhecimentos?.map((value) => (
+            <KnowledgeGroup key={value.nome + value.porcentagem}>
+              <Label> { value.nome } </Label>
+              <Progress percent={value.porcentagem}/>
+            </KnowledgeGroup>
+          ))
+        }
       </UserSection>
     </>
   )
