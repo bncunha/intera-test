@@ -48,7 +48,10 @@ const UserList: React.FC = () => {
           <UserCardContainer tabIndex={0} onClick={handleAddNewUser}>
             <AddUserCard>
               <PlusIconContainer> <FaPlus/> </PlusIconContainer>
-              <Title2 style={{textAlign: 'center'}}> Adicionar novo Usuário </Title2>
+              <Title2 style={{textAlign: 'center'}}> 
+                Adicionar meus dados 
+              </Title2>
+              <img src="https://content.linkedin.com/content/dam/developer/global/en_US/site/img/signin-button.png" width="200" style={{display: 'block', margin: 'auto'}}/>
             </AddUserCard>
           </UserCardContainer>
       
