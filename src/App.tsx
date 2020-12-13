@@ -1,8 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import UserDetails from './pages/UserDetails';
 import Api from './services/api';
+import Routes from './routes';
 
 function App() {
 
@@ -10,7 +9,7 @@ function App() {
 
   return (
     <div className="App">
-      <UserDetails />
+      <Routes />
     </div>
   );
 }
