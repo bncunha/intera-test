@@ -5,6 +5,7 @@ import colors from '../../styles/colors';
 export const UserCardContainer = styled.div`
   flex-basis: 300px;
   margin: 15px;
+  cursor: pointer;
 `;
 
 export const UserSearch = styled.input`

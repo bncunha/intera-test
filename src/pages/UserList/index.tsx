@@ -6,10 +6,13 @@ import { Usuario } from '../../services/api';
 import { UsuarioService } from '../../services/UsuarioService';
 import { AddUserCard, PlusIconContainer, UserCardContainer, UserSearch } from './styles';
 import UserCard from './UserCard';
+import { Link } from 'react-router-dom';
+import Popup from '../../components/Popup';
 
 const UserList: React.FC = () => {
   const [users, setUsers] = useState<Usuario[]>([]);
   const [usersFiltered, setUsersFiltered] = useState<Usuario[]>([]);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const filterByName = useCallback((name: string) => {
     console.log(name)
@@ -26,25 +29,32 @@ const UserList: React.FC = () => {
   }, []);
 
   return (
-    <Main style={{paddingTop: 10}}>
-      <UserSearch placeholder="Buscar por talentos..." onChange={(ev) => filterByName(ev.target.value)}/>
-      <Row style={{justifyContent: 'center'}}>
-        <UserCardContainer>
-          <AddUserCard>
-            <PlusIconContainer> <FaPlus/> </PlusIconContainer>
-            <Title2 style={{textAlign: 'center'}}> Adicionar novo Usuário </Title2>
-          </AddUserCard>
-        </UserCardContainer>
-    
-        {
-          usersFiltered.map((user) => (
-            <UserCardContainer>
-              <UserCard key={user.nome} user={user}/>
-            </UserCardContainer>
-          ))
-        }
-      </Row>
-    </Main>
+    <>
+      <Popup isOpen={modalOpen} onRequestClose={setModalOpen}>
+        cifwejfi
+      </Popup>
+      <Main style={{paddingTop: 10}}>
+        <UserSearch placeholder="Buscar por talentos..." onChange={(ev) => filterByName(ev.target.value)}/>
+        <Row style={{justifyContent: 'center'}}>
+          <UserCardContainer tabIndex={0} onClick={() => setModalOpen(true)}>
+            <AddUserCard>
+              <PlusIconContainer> <FaPlus/> </PlusIconContainer>
+              <Title2 style={{textAlign: 'center'}}> Adicionar novo Usuário </Title2>
+            </AddUserCard>
+          </UserCardContainer>
+      
+          {
+            usersFiltered.map((user) => (
+              <UserCardContainer key={user.nome}>
+                <Link to={`/user/${user.nome}`} style={{textDecoration: 'none'}}>
+                  <UserCard user={user}/>
+                </Link>
+              </UserCardContainer>
+            ))
+          }
+        </Row>
+      </Main>
+    </>
   )
 };
 
