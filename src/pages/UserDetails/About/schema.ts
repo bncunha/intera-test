@@ -1,8 +1,7 @@
 import * as yup from 'yup';
 
 export const AboutSchema = yup.object().shape({
-  nome: yup.string().required(),
-  ocupacao: yup.string().required(),
+  sobre: yup.string().required('Campo é obrigatório!'),
   email: yup.string()
     .required('E-mail é obrigatório!')
     .email('E-mail inválido!')

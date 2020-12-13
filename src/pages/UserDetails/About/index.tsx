@@ -1,6 +1,6 @@
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FaMinusSquare, FaPlusSquare } from 'react-icons/fa';
 import { Fieldset, Label } from '../../../components/Forms';
 import { Button, ButtonsGroup } from '../../../components/Forms/Button';
@@ -12,18 +12,24 @@ import { AboutGroup, MinusButton, PlusButton } from './styles';
 import * as yup from 'yup';
 import getValidationErrors from '../../../utils/getValidationErros';
 import { UsuarioService } from '../../../services/UsuarioService';
+import { Usuario } from '../../../services/api';
 
-const About: React.FC = () => {
+interface AboutProps {
+  user: Usuario;
+}
+
+const About: React.FC<AboutProps> = ({
+  user
+}) => {
   const formRef = useRef<FormHandles>(null);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [qtdSites, setQtdSites] = useState<number>(0);
+  const [arraySitesInput, setArraySitesInput] = useState<any[]>([]);
 
   const handleSubmit = async (data: any) => {
     try {
-      data.nome = 'Bruno Cunha';
-      data.ocupacao = 'Bruno Cunha';
       const schema: any = await AboutSchema.validate(data, {abortEarly: false});
-      UsuarioService.saveUsuario(data.nome, schema);
+      UsuarioService.saveUsuario(user.nome, schema);
       setEditMode(false);
     } catch (err) {
       if (err instanceof yup.ValidationError) {
@@ -31,12 +37,31 @@ const About: React.FC = () => {
       }      
     };
   };
+
+  useEffect(() => {
+    if (user.sites) {
+      setQtdSites(user.sites.length)
+    }
+  }, [user.sites])
+
+  useEffect(() => {
+    formRef.current?.setData(user);
+  }, [user, arraySitesInput, editMode])
+  
+  useEffect(() => {
+    setArraySitesInput([...Array(qtdSites)]);
+  }, [qtdSites])
   
   return (
     <UserSection title="Sobre" onEdit={() => setEditMode(true)}>
       <Form ref={formRef} onSubmit={handleSubmit}>
         <Fieldset disabled={!editMode}>
-          <p> Estou sempre disposto a aprender novas tecnologias, aprecio o compartilhamento de conhecimento, experiências e o trabalho em equipe. Possuo experiência com Web Development, comunicação cliente-servidor, design de interfaces e web components. Utilizando linguagens e tecnologias como javascript (Node.js e Angular2+), Java, banco de dados MySQL e SQL Server.  </p>
+          <Label htmlFor="sobre"> Sobre mim </Label>
+          {
+            editMode
+            ? <Input name="sobre"/>
+            : <p> { user.sobre } </p>
+          }
           <AboutGroup>
             <Label htmlFor="email"> E-mail </Label>
             <Input id="email" name="email"/>
@@ -45,7 +70,7 @@ const About: React.FC = () => {
             <Label style={{display: 'inline-block'}}> Sites </Label>
             { editMode && <PlusButton onClick={() => setQtdSites(qtdSites + 1)} type="button" title="Adicionar site"> <FaPlusSquare/> </PlusButton> }
             {
-              [...Array(qtdSites)].map((value: any, index: number) => (
+              arraySitesInput.map((value: any, index: number) => (
                 <Row noWrap key={index}>
                   <Input name={`sites[${index}]`}/>
                   {
