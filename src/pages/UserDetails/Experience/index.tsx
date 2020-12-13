@@ -14,6 +14,7 @@ import { MinusButton, PlusButton } from '../About/styles';
 import UserSection from '../UserSection';
 import * as yup from 'yup';
 import getValidationErrors from '../../../utils/getValidationErros';
+import DatePicker from '../../../components/Forms/Datepicker';
 
 const Experience: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
@@ -68,11 +69,11 @@ const Experience: React.FC = () => {
                 </div>
                 <div>
                   <Label> Data de início </Label>
-                  <Input name="dataInicio"/>
+                  <DatePicker name="dataInicio"/>
                 </div>
                 <div>
                   <Label> Data fim </Label>
-                  <Input name="dataFim"/>
+                  <DatePicker name="dataFim"/>
                 </div>
                 <div>
                   <Label> Detalhes </Label>
