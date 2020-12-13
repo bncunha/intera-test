@@ -1,6 +1,6 @@
 import { FormHandles, Scope } from '@unform/core';
 import { Form } from '@unform/web';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FaMinusSquare, FaPlusSquare } from 'react-icons/fa';
 import { Label } from '../../../components/Forms';
 import { Button, ButtonsGroup } from '../../../components/Forms/Button';
@@ -9,7 +9,7 @@ import { Row } from '../../../components/Layout';
 import Popup from '../../../components/Popup';
 import { Title2 } from '../../../components/Texts';
 import Timeline from '../../../components/Timeline';
-import { Experiencia } from '../../../services/api';
+import { Experiencia, Usuario } from '../../../services/api';
 import { MinusButton, PlusButton } from '../About/styles';
 import UserSection from '../UserSection';
 import * as yup from 'yup';
@@ -18,10 +18,19 @@ import DatePicker from '../../../components/Forms/Datepicker';
 import { ExperienceSchema } from './schema';
 import { UsuarioService } from '../../../services/UsuarioService';
 
-const Experience: React.FC = () => {
+interface ExperienceProps {
+  user: Usuario;
+};
+
+const Experience: React.FC<ExperienceProps> = ({
+  user
+}) => {
   const formRef = useRef<FormHandles>(null);
+  const [userState, setUserState] = useState<any>(user);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [qtdItems, setQtdItems] = useState<number>(1);
+  const [arrayItems, setArrayItems] = useState<any[]>([]);
+  const [experiencias, setExperiencias] = useState<Experiencia[]>(user.experiencias);
 
   const handleSubmit = async (data: {experiencias?: Experiencia[]}) => {
     try {
@@ -29,8 +38,13 @@ const Experience: React.FC = () => {
         data.experiencias = [];
       }
       formRef.current?.setErrors({});
+      data.experiencias?.sort((a: Experiencia, b: Experiencia) => b.dataInicio.getTime() - a.dataInicio.getTime())
       const schema: any = await ExperienceSchema.validate(data, {abortEarly: false});
-      UsuarioService.saveUsuario('Bruno Cunha', schema);
+      UsuarioService.saveUsuario(user.nome, schema);
+      const userSaved = UsuarioService.findByName(userState.nome).value;
+      setIsOpen(false);
+      setExperiencias(userSaved?.experiencias || []);
+      setUserState(userSaved);
     } catch (err) {
       if (err instanceof yup.ValidationError) {
         formRef.current?.setErrors(getValidationErrors(err))
@@ -43,15 +57,37 @@ const Experience: React.FC = () => {
     formRef.current?.setErrors({});
   }
 
+  useEffect(() => {
+    if (userState.experiencias) {
+      setQtdItems(userState.experiencias.length)
+    }
+  }, [userState.experiencias, user.experiencias])
+
+  useEffect(() => {
+    setArrayItems([...Array(qtdItems)]);
+  }, [qtdItems]);
+
+  useEffect(() => {
+    setUserState(user);
+    setExperiencias(user.experiencias);
+  }, [user])
+  
   const renderFormPopup = () => (
     <Popup isOpen={isOpen} onRequestClose={handleCancel} size="large">
       <Row noWrap style={{alignItems: 'center'}}>
         <Title2 style={{fontSize: 18}}> Experiências </Title2>
         <PlusButton type="button" onClick={() => setQtdItems(qtdItems + 1)}> <FaPlusSquare/> </PlusButton>
       </Row>
-      <Form ref={formRef} onSubmit={handleSubmit}>
+      <Form ref={formRef} onSubmit={handleSubmit} 
+      initialData={{
+        experiencias: userState?.experiencias?.map((exp: Experiencia) => {
+          exp.dataInicio = new Date(exp.dataInicio);
+          exp.dataFim = new Date(exp.dataFim);
+          return exp;
+        })
+      }}>
         {
-          [...Array(qtdItems)].map((value: any, index: number) => (
+          arrayItems.map((value: any, index: number) => (
             <Scope path={`experiencias[${index}]`} key={index}>
               <Row style={{marginBottom: 20, justifyContent: 'space-between', padding: 10, border: '1px solid #cdcdcd'}}>
                 {  
@@ -96,7 +132,7 @@ const Experience: React.FC = () => {
     <>
       { renderFormPopup() }
       <UserSection title="Experiências" onEdit={() => setIsOpen(true)}>
-        <Timeline/>
+        <Timeline timeline={experiencias}/>
       </UserSection>
     </>
   )

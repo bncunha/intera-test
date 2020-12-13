@@ -45,7 +45,7 @@ const UserDetails: React.FC = () => {
             <Knowledge user={user}/>          
           </InfoContainer>
           <InfoContainer>
-            <Experience/>
+            <Experience user={user}/>
           </InfoContainer>
         </Row>
       </Main>

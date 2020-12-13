@@ -1,33 +1,24 @@
 import React from 'react';
+import { Experiencia } from '../../services/api';
 import { TimelineDescription, TimelineInfo, TimelineNode, TimelineTitle, TimelineWrapper } from './styles';
 
-const Timeline: React.FC = () => {
+interface TimelineProps {
+  timeline: Experiencia[];
+};
+
+const Timeline: React.FC<TimelineProps> = ({
+  timeline
+}) => {
   return (
     <TimelineWrapper>
-      <TimelineNode>
-        <TimelineTitle> Front-end </TimelineTitle>
-        <TimelineInfo> Wize Company </TimelineInfo>
-        <TimelineInfo> fev. 2018 - jan. 2019 </TimelineInfo>
-        <TimelineDescription> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. </TimelineDescription>
-      </TimelineNode>
-      <TimelineNode>
-        <TimelineTitle> Front-end </TimelineTitle>
-        <TimelineInfo> Wize Company </TimelineInfo>
-        <TimelineInfo> fev. 2018 - jan. 2019 </TimelineInfo>
-        <TimelineDescription> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. </TimelineDescription>
-      </TimelineNode>
-      <TimelineNode>
-        <TimelineTitle> Front-end </TimelineTitle>
-        <TimelineInfo> Wize Company </TimelineInfo>
-        <TimelineInfo> fev. 2018 - jan. 2019 </TimelineInfo>
-        <TimelineDescription> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. </TimelineDescription>
-      </TimelineNode>
-      <TimelineNode>
-        <TimelineTitle> Front-end </TimelineTitle>
-        <TimelineInfo> Wize Company </TimelineInfo>
-        <TimelineInfo> fev. 2018 - jan. 2019 </TimelineInfo>
-        <TimelineDescription> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. </TimelineDescription>
-      </TimelineNode>
+      { timeline?.map(exp => (
+        <TimelineNode key={exp.ocupacao + exp.empresa + exp.dataInicio}>
+          <TimelineTitle> { exp.ocupacao } </TimelineTitle>
+          <TimelineInfo> { exp.empresa } </TimelineInfo>
+          <TimelineInfo> { exp.dataInicio.toString() } - { exp.dataFim ? exp.dataFim.toString() : 'presente' } </TimelineInfo>
+          <TimelineDescription> { exp.detalhes } </TimelineDescription>
+        </TimelineNode>
+      ))}
     </TimelineWrapper>
   );
 };

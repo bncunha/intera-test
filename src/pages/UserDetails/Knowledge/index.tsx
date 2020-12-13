@@ -39,8 +39,8 @@ const Knowledge: React.FC<KnowledgeProps> = ({
       }
       formRef.current?.setErrors({});
       const schema: any = await KnowledgeSchema.validate(data, {abortEarly: false});
-      setIsOpen(false);
       UsuarioService.saveUsuario(userState.nome, schema);
+      setIsOpen(false);
       setConhecimentos(UsuarioService.findByName(userState.nome).value?.conhecimentos || []);
       setUserState(UsuarioService.findByName(userState.nome).value);
     } catch (err) {
