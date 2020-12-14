@@ -4,9 +4,11 @@ import About from './About';
 import Experience from './Experience';
 import Knowledge from './Knowledge';
 import { BackgroundCover, InfoContainer, UserImage, UserName, UserRole } from './styles';
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import { UsuarioService } from '../../services/UsuarioService';
 import { Usuario } from '../../services/database';
+import { FaArrowLeft } from 'react-icons/fa';
+import colors from '../../styles/colors';
 
 interface UserDetailsParams {
   name: string;
@@ -41,6 +43,9 @@ const UserDetails: React.FC = () => {
       <UserRole> { user.ocupacao } </UserRole>
 
       <Main>
+        <Link to="/" aria-label="Voltar" style={{color: colors.text, fontSize: 22, marginBottom: 15}}>
+          <FaArrowLeft/>
+        </Link>
         <Row style={{justifyContent: 'space-between'}}>
           <div style={{width: '100%'}}>
             <About user={user}/>
