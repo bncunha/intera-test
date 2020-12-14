@@ -7,7 +7,7 @@ export interface Experiencia {
   ocupacao: string;
   empresa: string;
   dataInicio: Date;
-  dataFim: Date;
+  dataFim?: Date;
   detalhes: string;
 }
 

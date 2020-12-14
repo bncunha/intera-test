@@ -38,14 +38,15 @@ const Experience: React.FC<ExperienceProps> = ({
         data.experiencias = [];
       }
       formRef.current?.setErrors({});
-      data.experiencias?.sort((a: Experiencia, b: Experiencia) => b.dataInicio.getTime() - a.dataInicio.getTime())
       const schema: any = await ExperienceSchema.validate(data, {abortEarly: false});
+      schema.experiencias?.sort((a: Experiencia, b: Experiencia) => b.dataInicio.getTime() - a.dataInicio.getTime())
       UsuarioService.saveUsuario(user.nome, schema);
       const userSaved = UsuarioService.findByName(userState.nome).value;
       setIsOpen(false);
       setExperiencias(userSaved?.experiencias || []);
       setUserState(userSaved);
     } catch (err) {
+      console.log(err);
       if (err instanceof yup.ValidationError) {
         formRef.current?.setErrors(getValidationErrors(err))
       }
@@ -82,7 +83,7 @@ const Experience: React.FC<ExperienceProps> = ({
       initialData={{
         experiencias: userState?.experiencias?.map((exp: Experiencia) => {
           exp.dataInicio = new Date(exp.dataInicio);
-          exp.dataFim = new Date(exp.dataFim);
+          exp.dataFim = exp.dataFim ? new Date(exp.dataFim) : undefined;
           return exp;
         })
       }}>
