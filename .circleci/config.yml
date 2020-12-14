@@ -34,7 +34,9 @@ jobs:
     docker:
       - image: circleci/node:latest
     steps:
-      - run: echo 'Deploy'
+      - run:
+          name: Ready to deploy
+          command: curl -X POST -d {} $DEPLOY_HOOK
 
 workflows:
   build-and-deploy:
