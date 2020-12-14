@@ -40,9 +40,6 @@ workflows:
             branches:
               only:
                 - main
-      - node/test:
-          requires:
-            - build
       - test:
           requires:
             - build
