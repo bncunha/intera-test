@@ -22,7 +22,7 @@ jobs:
     docker:
       - image: circleci/node:latest
     steps:
-      -checkout
+      - checkout
       - run:
           name: Init tests
           command: yarn test --runInBand
@@ -44,9 +44,9 @@ workflows:
           requires:
             - build
       - test:
-        requires:
-          - build
-          - node/test
+          requires:
+            - build
+            - node/test
       - deploy:
           requires:
             - build
