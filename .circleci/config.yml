@@ -7,12 +7,20 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies
       - run:
           name: Install Node Depend.
           command: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Building Project
-          command: yarn build
+          command: yarn build --runInBand
   deploy:
     docker:
       - image: circleci/node:latest
