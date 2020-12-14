@@ -11,7 +11,6 @@ function App() {
   
   useEffect(() => {
     Database.init();
-    LinkedinService.getResponse();
   }, [])
 
   return (

@@ -23,12 +23,8 @@ const UserList: React.FC = () => {
       : users);
   }, [users])
 
-  const handleAddNewUser = async () => {
-    try {
-      await LinkedinService.getAuthorizationCode();
-    } catch(err) {
-      console.log(err);
-    }
+  const handleAddNewUser = () => {
+    LinkedinService.handleAuthorizationCode();
   };
 
   useEffect(() => {
