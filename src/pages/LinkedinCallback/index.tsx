@@ -14,11 +14,10 @@ const LinkedinCallback: React.FC = () => {
       if (queryParams.get('error')) {
         toastError('Erro ao se autenticar com o Linkedin!');
       } else if (queryParams.get('code')) {
-        await LinkedinService.handleAccessToken(queryParams.get('code') || '');
         try {
+          await LinkedinService.handleAccessToken(queryParams.get('code') || '');
           const { data } = await LinkedinService.getUserData();
           UsuarioService.saveUsuario(data.firstName.localized.pt_BR + ' ' + data.lastName.localized.pt_BR, {imagem: data.profilePicture} as any)
-          console.log(data);
           history.replace('/');
         } catch(err) {
           console.log(err);

@@ -16,7 +16,7 @@ const Timeline: React.FC<TimelineProps> = ({
         <TimelineNode key={exp.ocupacao + exp.empresa + exp.dataInicio}>
           <TimelineTitle> { exp.ocupacao } </TimelineTitle>
           <TimelineInfo> { exp.empresa } </TimelineInfo>
-          <TimelineInfo> { moment(exp.dataInicio).format('DD/MM/yyyy') } - { exp.dataFim?.getDate() ? moment(exp.dataFim).format('DD/MM/yyyy') : 'presente' } </TimelineInfo>
+          <TimelineInfo> { moment(exp.dataInicio).format('DD/MM/yyyy') } - { new Date(exp.dataFim as any)?.getDate() ? moment(exp.dataFim).format('DD/MM/yyyy') : 'presente' } </TimelineInfo>
           <TimelineDescription> { exp.detalhes } </TimelineDescription>
         </TimelineNode>
       ))}

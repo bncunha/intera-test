@@ -52,7 +52,8 @@ export const TimelineInfo = styled.p`
 export const TimelineDescription = styled.p`
   margin: 0;
   max-width: 400px;
-  font-size: 14px;
+  font-size: 13px;
   align-text: justify;
   margin-top: 5px;
+  font-weight: 300;
 `;
