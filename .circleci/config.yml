@@ -1,0 +1,36 @@
+version: 2.1
+orbs:
+  node: circleci/node@3.0.0
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - run:
+          name: Install Node Depend.
+          command: yarn install
+      - run:
+          name: Building Project
+          command: yarn build
+  deploy:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - run: echo 'Deploy'
+
+workflows:
+  build-and-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+      - node/test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - build
+            - node/test
