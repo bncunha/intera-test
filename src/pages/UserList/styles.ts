@@ -5,8 +5,19 @@ import colors from '../../styles/colors';
 export const UserCardContainer = styled.div`
   flex-basis: 300px;
   margin: 15px;
-  cursor: pointer;
   height: 280px;
+`;
+
+export const UserCardStyle = styled(Card)`
+  height: 280px;
+  text-align: center;
+  height: 280px;
+  transition: 0.5s all ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
 `;
 
 export const UserSearch = styled.input`
@@ -24,10 +35,6 @@ export const UserSearch = styled.input`
   font-size: 23px;
   text-align: center;
 `; 
-
-export const AddUserCard = styled(Card) `
-  height: 280px;
-`;
 
 export const PlusIconContainer = styled.div`
   font-size: 53px;
