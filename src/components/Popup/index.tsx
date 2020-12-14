@@ -15,7 +15,9 @@ interface PopupProps {
   onDenyClick?: () => void;
 }
 
-Modal.setAppElement('#root');
+if (process.env.NODE_ENV !== 'test') {
+  Modal.setAppElement('#root');
+}
 
 const Popup: React.FC<PopupProps> = ({
   size = 'medium', 
