@@ -9,9 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
 
   
-  useEffect(() => {
-    Database.init();
-  }, [])
+  Database.init();
 
   return (
     <div className="App">

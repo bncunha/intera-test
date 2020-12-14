@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { toastError } from '../../components/Toast';
 import { LinkedinService } from '../../services/LinkedinService';
+import { UsuarioService } from '../../services/UsuarioService';
 
 const LinkedinCallback: React.FC = () => {
   const location = useLocation();
@@ -15,11 +16,11 @@ const LinkedinCallback: React.FC = () => {
       } else if (queryParams.get('code')) {
         await LinkedinService.handleAccessToken(queryParams.get('code') || '');
         try {
-          const user = await LinkedinService.getUserData();
-          debugger;
+          const { data } = await LinkedinService.getUserData();
+          UsuarioService.saveUsuario(data.firstName.localized.pt_BR + ' ' + data.lastName.localized.pt_BR, {imagem: data.profilePicture} as any)
+          console.log(data);
         } catch(err) {
           console.log(err);
-          debugger;
         }
       }
     }

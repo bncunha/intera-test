@@ -7,6 +7,7 @@ export const UsuarioService = {
     const allUsers = Database.get();
     if (!finded.value) {
       const user = Object.assign({}, data);
+      user.nome = name;
       allUsers.push(user);
     } else {
       const user = Object.assign(finded.value, data);

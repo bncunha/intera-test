@@ -34,11 +34,7 @@ export const LinkedinService = {
   },
 
   getUserData: () => {
-    return Axios.get('http://localhost:9000/linkedin/user', {
-      headers: {
-        'Authorization': 'Bearer ' + Cookies.get('token')
-      }
-    })
+    return Axios.get('http://localhost:9000/linkedin/user')
   },
 
   saveToken: (token: string) => {
