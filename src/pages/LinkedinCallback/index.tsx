@@ -8,16 +8,24 @@ const LinkedinCallback: React.FC = () => {
   const history = useHistory();
 
   useEffect(() => {
-    debugger;
-    const queryParams = new URLSearchParams(location.search);
-    if (queryParams.get('error')) {
-      toastError('Erro ao se autenticar com o Linkedin!');
-    } else if (queryParams.get('code')) {
-      console.log(queryParams.get('code'));
-      LinkedinService.handleAccessToken(queryParams.get('code') || '')
+    const getLinkedinInfo = async () => {
+      const queryParams = new URLSearchParams(location.search);
+      if (queryParams.get('error')) {
+        toastError('Erro ao se autenticar com o Linkedin!');
+      } else if (queryParams.get('code')) {
+        await LinkedinService.handleAccessToken(queryParams.get('code') || '');
+        try {
+          const user = await LinkedinService.getUserData();
+          debugger;
+        } catch(err) {
+          console.log(err);
+          debugger;
+        }
+      }
     }
+    getLinkedinInfo();
     history.replace('/');
-  }, [location])
+  }, [location, history])
  
   return (
     <></>

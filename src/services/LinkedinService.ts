@@ -2,7 +2,6 @@ import Axios from 'axios';
 import Cookies from 'js-cookie';
 
 const CLIENT_ID = '7728gm8l07ypea';
-const CLIENT_SECRET = 'dHc4WyOyDFYpMMOA';
 const BASE_URL = 'https://www.linkedin.com/'
 const REDIRECT_URL = 'http://localhost:9000/linkedin'
 
@@ -18,8 +17,7 @@ export const LinkedinService = {
     }).toString()}`;      
   },
 
-  handleAccessToken: async (authCode: string) => {
-    
+  handleAccessToken: async (authCode: string) => {    
     try {
       const response = await Axios.post(`http://localhost:9000/linkedin/accessToken`, {code: authCode}, {
         headers: {
@@ -28,9 +26,19 @@ export const LinkedinService = {
         }
       });
       LinkedinService.saveToken(response.data.access_token);
+      return response.data.access_token;
     } catch(err) {
-      console.log(err)
+      console.log(err);
+      return null;
     }
+  },
+
+  getUserData: () => {
+    return Axios.get('http://localhost:9000/linkedin/user', {
+      headers: {
+        'Authorization': 'Bearer ' + Cookies.get('token')
+      }
+    })
   },
 
   saveToken: (token: string) => {

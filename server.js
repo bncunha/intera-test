@@ -2,8 +2,10 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const Axios = require('axios')
+const cookieParser = require('cookie-parser')
 
 app.use(express.static(path.join(__dirname, 'build')));
+app.use(cookieParser());
 app.use(express.json());
 
 app.post('/linkedin/accessToken', async (req, res) => {
@@ -26,7 +28,21 @@ app.post('/linkedin/accessToken', async (req, res) => {
     console.log(err);
     res.status(500).send('Erro ao recuprerar o token');
   }
+})
 
+app.get('/linkedin/user', async (req, res) => {
+  try {
+    const response = await Axios.get('https://api.linkedin.com/v2/me?projection=(id,firstName,lastName,profilePicture(displayImage~:playableStreams))', {
+      headers: {
+        'Authorization': 'Bearer ' + req.cookies.token
+      }
+    })
+    console.log(response.data);
+    res.json(response.data);
+  } catch(err) {
+    console.log(err);
+    res.status(500).send('Erro ao recuprerar o usuário');
+  }
 })
 
 app.get('/*', function (req, res) {
