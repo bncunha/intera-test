@@ -98,24 +98,24 @@ const Experience: React.FC<ExperienceProps> = ({
                   </div>
                 }
                 <div>
-                  <Label> Ocupação </Label>
-                  <Input name="ocupacao"/>
+                  <Label htmlFor={`ocupacao${index}`}> Ocupação </Label>
+                  <Input id={`ocupacao${index}`} name="ocupacao"/>
                 </div>
                 <div>
-                  <Label> Empresa </Label>
-                  <Input name="empresa"/>
+                  <Label htmlFor={`empresa${index}`}> Empresa </Label>
+                  <Input id={`empresa${index}`} name="empresa"/>
                 </div>
                 <div>
-                  <Label> Data de início </Label>
-                  <DatePicker name="dataInicio"/>
+                  <Label htmlFor={`dataInicio${index}`}> Data de início </Label>
+                  <DatePicker id={`dataInicio${index}`} name="dataInicio"/>
                 </div>
                 <div>
-                  <Label> Data fim </Label>
-                  <DatePicker name="dataFim"/>
+                  <Label htmlFor={`dataFim${index}`}> Data fim </Label>
+                  <DatePicker id={`dataFim${index}`} name="dataFim"/>
                 </div>
                 <div>
-                  <Label> Detalhes </Label>
-                  <Input name="detalhes"/>
+                  <Label htmlFor={`detalhes${index}`}> Detalhes </Label>
+                  <Input id={`detalhes${index}`} name="detalhes"/>
                 </div>
               </Row>
             </Scope>

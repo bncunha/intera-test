@@ -75,7 +75,7 @@ const About: React.FC<AboutProps> = ({
             {
               arraySitesInput.map((value: any, index: number) => (
                 <Row noWrap key={index}>
-                  <Input name={`sites[${index}]`}/>
+                  <Input name={`sites[${index}]`} aria-label={`Site ${index+1}`}/>
                   {
                     editMode && qtdSites === index + 1 &&
                     <MinusButton type="button" title="Remover site" onClick={() => setQtdSites(qtdSites - 1)}> 

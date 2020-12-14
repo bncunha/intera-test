@@ -16,7 +16,7 @@ const UserSection: React.FC<UserSectionProps> = ({
 }) => {
   return (
     <Card style={{marginBottom: 35}}>
-      <EditButton onClick={onEdit}> <FaEdit /> </EditButton>
+      <EditButton onClick={onEdit} title="Editar"> <FaEdit /> </EditButton>
       <UserSectionTitle> {title} </UserSectionTitle>
       { children }
     </Card>

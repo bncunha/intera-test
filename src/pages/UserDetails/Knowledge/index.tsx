@@ -82,12 +82,12 @@ const Knowledge: React.FC<KnowledgeProps> = ({
             <Scope path={`conhecimentos[${index}]`} key={index}>
               <Row noWrap style={{marginBottom: 10}}>
                 <div>
-                  <Label> Nome </Label>
-                  <Input name="nome"/>
+                  <Label htmlFor={`nome${index}`}> Nome </Label>
+                  <Input id={`nome${index}`} name="nome"/>
                 </div>
                 <div className="ml-3">
-                  <Label> Porcentagem </Label>
-                  <Input name="porcentagem"/>
+                  <Label htmlFor={`porcentagem${index}`}> Porcentagem </Label>
+                  <Input id={`porcentagem${index}`} name="porcentagem"/>
                 </div>
                 <div className="ml-3">
                   { 

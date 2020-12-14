@@ -34,7 +34,7 @@ const UserList: React.FC = () => {
   return (
     <>
       <Main style={{paddingTop: 10}}>
-        <UserSearch placeholder="Buscar por talentos..." onChange={(ev) => filterByName(ev.target.value)}/>
+        <UserSearch aria-label="Buscar talentos " placeholder="Buscar por talentos..." onChange={(ev) => filterByName(ev.target.value)}/>
         <Row style={{justifyContent: 'center'}}>
           <UserCardContainer tabIndex={0} onClick={handleAddNewUser}>
             <AddUserCard>

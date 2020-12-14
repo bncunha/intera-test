@@ -11,7 +11,7 @@ export const UserCardContainer = styled.div`
 
 export const UserSearch = styled.input`
   border: none;
-  color: ${colors.text};
+  color: ${colors.title};
   border-bottom: 1px solid ${colors.text};
   background: transparent;
   border-radius: 0;
