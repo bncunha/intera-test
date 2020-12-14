@@ -6,6 +6,7 @@ export const UserCardContainer = styled.div`
   flex-basis: 300px;
   margin: 15px;
   cursor: pointer;
+  height: 280px;
 `;
 
 export const UserSearch = styled.input`

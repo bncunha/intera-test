@@ -1,29 +1,30 @@
-import Api, { Usuario } from "./api";
+import { Usuario, Database } from "./database";
 
 export const UsuarioService = {
 
   saveUsuario: (name: string, data: Usuario) => {
     const finded = UsuarioService.findByName(name);
-    const allUsers = Api.get();
+    const allUsers = Database.get();
     if (!finded.value) {
       const user = Object.assign({}, data);
+      user.nome = name;
       allUsers.push(user);
     } else {
       const user = Object.assign(finded.value, data);
       allUsers[finded.index] = user;
     }
-    Api.save(allUsers);
+    Database.save(allUsers);
   },
 
   findByName: (name: string): {value: Usuario | undefined, index: number} => {
     const findFunction = (user: Usuario) => user.nome === name;
     return {
-      value: Api.get().find(findFunction),
-      index: Api.get().findIndex(findFunction),
+      value: Database.get().find(findFunction),
+      index: Database.get().findIndex(findFunction),
     }
   },
 
   getAll: () => {
-    return Api.get();
+    return Database.get();
   }
 };

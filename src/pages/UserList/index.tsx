@@ -2,17 +2,16 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import {  Main, Row } from '../../components/Layout';
 import { Title2 } from '../../components/Texts';
-import { Usuario } from '../../services/api';
+import { Usuario } from '../../services/database';
 import { UsuarioService } from '../../services/UsuarioService';
 import { AddUserCard, PlusIconContainer, UserCardContainer, UserSearch } from './styles';
 import UserCard from './UserCard';
 import { Link } from 'react-router-dom';
-import Popup from '../../components/Popup';
+import { LinkedinService } from '../../services/LinkedinService';
 
 const UserList: React.FC = () => {
   const [users, setUsers] = useState<Usuario[]>([]);
   const [usersFiltered, setUsersFiltered] = useState<Usuario[]>([]);
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const filterByName = useCallback((name: string) => {
     console.log(name)
@@ -22,6 +21,10 @@ const UserList: React.FC = () => {
       : users);
   }, [users])
 
+  const handleAddNewUser = () => {
+    LinkedinService.handleAuthorizationCode();
+  };
+
   useEffect(() => {
     const allUsers = UsuarioService.getAll();
     setUsers(allUsers);
@@ -30,16 +33,16 @@ const UserList: React.FC = () => {
 
   return (
     <>
-      <Popup isOpen={modalOpen} onRequestClose={setModalOpen}>
-        cifwejfi
-      </Popup>
       <Main style={{paddingTop: 10}}>
         <UserSearch placeholder="Buscar por talentos..." onChange={(ev) => filterByName(ev.target.value)}/>
         <Row style={{justifyContent: 'center'}}>
-          <UserCardContainer tabIndex={0} onClick={() => setModalOpen(true)}>
+          <UserCardContainer tabIndex={0} onClick={handleAddNewUser}>
             <AddUserCard>
               <PlusIconContainer> <FaPlus/> </PlusIconContainer>
-              <Title2 style={{textAlign: 'center'}}> Adicionar novo Usuário </Title2>
+              <Title2 style={{textAlign: 'center'}}> 
+                Adicionar meus dados 
+              </Title2>
+              <img src="https://content.linkedin.com/content/dam/developer/global/en_US/site/img/signin-button.png" width="200" style={{display: 'block', margin: 'auto'}}/>
             </AddUserCard>
           </UserCardContainer>
       

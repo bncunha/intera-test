@@ -6,7 +6,7 @@ import Knowledge from './Knowledge';
 import { BackgroundCover, InfoContainer, UserImage, UserName, UserRole } from './styles';
 import { useParams, useHistory } from "react-router-dom";
 import { UsuarioService } from '../../services/UsuarioService';
-import { Usuario } from '../../services/api';
+import { Usuario } from '../../services/database';
 
 interface UserDetailsParams {
   name: string;
@@ -16,6 +16,10 @@ const UserDetails: React.FC = () => {
   const history = useHistory();
   const { name } = useParams<UserDetailsParams>();
   const [user, setUser] = useState<Usuario>({} as Usuario);
+
+  const getUserImage = (user: Usuario) => {
+    return user.imagem?.['displayImage~']?.elements?.[0]?.identifiers?.[0].identifier;
+  };
 
   useEffect(() => {
     try {
@@ -32,7 +36,7 @@ const UserDetails: React.FC = () => {
   return (
     <>
       <BackgroundCover/>
-      <UserImage src="https://avatars2.githubusercontent.com/u/21287627?s=460&u=8cf8d6181b4dff0bc653def5089b9255d4067b9f&v=4" alt="Imagem de perfil"/>
+      <UserImage src={getUserImage(user)} alt="Imagem de perfil"/>
       <UserName> { user.nome } </UserName>
       <UserRole> { user.ocupacao } </UserRole>
 

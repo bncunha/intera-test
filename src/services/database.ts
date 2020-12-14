@@ -7,13 +7,13 @@ export interface Experiencia {
   ocupacao: string;
   empresa: string;
   dataInicio: Date;
-  dataFim: Date;
+  dataFim?: Date;
   detalhes: string;
 }
 
 export interface Usuario {
   nome: string;
-  imagem: string;
+  imagem: any;
   ocupacao: string;
   sobre: string;
   email: string,
@@ -22,10 +22,10 @@ export interface Usuario {
   experiencias: Experiencia[]
 }
 
-const Api = {
+export const Database = {
   init: () => {
-    if (!Api.get()) {
-      Api.save([]);
+    if (!Database.get()) {
+      Database.save([]);
     }
   },
 
@@ -38,5 +38,3 @@ const Api = {
   }
 
 };
-
-export default Api;

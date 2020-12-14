@@ -16,7 +16,7 @@ import * as yup from 'yup';
 import getValidationErrors from '../../../utils/getValidationErros';
 import { KnowledgeSchema } from './schema';
 import { UsuarioService } from '../../../services/UsuarioService';
-import { Conhecimento, Usuario } from '../../../services/api';
+import { Conhecimento, Usuario } from '../../../services/database';
 
 interface KnowledgeProps {
   user: Usuario;

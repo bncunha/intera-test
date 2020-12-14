@@ -12,7 +12,7 @@ import { AboutGroup, MinusButton, PlusButton } from './styles';
 import * as yup from 'yup';
 import getValidationErrors from '../../../utils/getValidationErros';
 import { UsuarioService } from '../../../services/UsuarioService';
-import { Usuario } from '../../../services/api';
+import { Usuario } from '../../../services/database';
 
 interface AboutProps {
   user: Usuario;
@@ -25,12 +25,14 @@ const About: React.FC<AboutProps> = ({
   const [editMode, setEditMode] = useState<boolean>(false);
   const [qtdSites, setQtdSites] = useState<number>(0);
   const [arraySitesInput, setArraySitesInput] = useState<any[]>([]);
+  const [sobre, setSobre] = useState<string>(user?.sobre);
 
   const handleSubmit = async (data: any) => {
     try {
       const schema: any = await AboutSchema.validate(data, {abortEarly: false});
       UsuarioService.saveUsuario(user.nome, schema);
       setEditMode(false);
+      setSobre(UsuarioService.findByName(user.nome).value?.sobre || '')
     } catch (err) {
       if (err instanceof yup.ValidationError) {
         formRef.current?.setErrors(getValidationErrors(err));
@@ -39,13 +41,14 @@ const About: React.FC<AboutProps> = ({
   };
 
   useEffect(() => {
+    setSobre(user.sobre);
     if (user.sites) {
       setQtdSites(user.sites.length)
     }
-  }, [user.sites])
+  }, [user])
 
   useEffect(() => {
-    formRef.current?.setData(user);
+    formRef.current?.setData(UsuarioService.findByName(user.nome).value || {});
   }, [user, arraySitesInput, editMode])
   
   useEffect(() => {
@@ -60,7 +63,7 @@ const About: React.FC<AboutProps> = ({
           {
             editMode
             ? <Input name="sobre"/>
-            : <p> { user.sobre } </p>
+            : <p> { sobre } </p>
           }
           <AboutGroup>
             <Label htmlFor="email"> E-mail </Label>
