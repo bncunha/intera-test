@@ -19,17 +19,20 @@ const LinkedinCallback: React.FC = () => {
           const { data } = await LinkedinService.getUserData();
           UsuarioService.saveUsuario(data.firstName.localized.pt_BR + ' ' + data.lastName.localized.pt_BR, {imagem: data.profilePicture} as any)
           console.log(data);
+          history.replace('/');
         } catch(err) {
           console.log(err);
+          history.replace('/');
         }
       }
     }
     getLinkedinInfo();
-    history.replace('/');
   }, [location, history])
  
   return (
-    <></>
+    <p style={{textAlign: 'center', marginTop: 50}}>
+      Aguarde...Carregando dados do linkedin...
+    </p>
   );
 };
 

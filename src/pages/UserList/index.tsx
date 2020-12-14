@@ -7,7 +7,6 @@ import { UsuarioService } from '../../services/UsuarioService';
 import { AddUserCard, PlusIconContainer, UserCardContainer, UserSearch } from './styles';
 import UserCard from './UserCard';
 import { Link } from 'react-router-dom';
-import Popup from '../../components/Popup';
 import { LinkedinService } from '../../services/LinkedinService';
 
 const UserList: React.FC = () => {
