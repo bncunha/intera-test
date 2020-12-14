@@ -13,7 +13,6 @@ import { LinkedinService } from '../../services/LinkedinService';
 const UserList: React.FC = () => {
   const [users, setUsers] = useState<Usuario[]>([]);
   const [usersFiltered, setUsersFiltered] = useState<Usuario[]>([]);
-  // const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const filterByName = useCallback((name: string) => {
     console.log(name)
@@ -35,9 +34,6 @@ const UserList: React.FC = () => {
 
   return (
     <>
-      {/* <Popup isOpen={modalOpen} onRequestClose={setModalOpen}>
-        cifwejfi
-      </Popup> */}
       <Main style={{paddingTop: 10}}>
         <UserSearch placeholder="Buscar por talentos..." onChange={(ev) => filterByName(ev.target.value)}/>
         <Row style={{justifyContent: 'center'}}>
