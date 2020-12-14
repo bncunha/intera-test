@@ -42,7 +42,7 @@ const UserList: React.FC = () => {
               <Title2 style={{textAlign: 'center'}}> 
                 Adicionar meus dados 
               </Title2>
-              <img src="https://content.linkedin.com/content/dam/developer/global/en_US/site/img/signin-button.png" width="200" style={{display: 'block', margin: 'auto'}}/>
+              <img src="https://content.linkedin.com/content/dam/developer/global/en_US/site/img/signin-button.png" alt="Linkedin button" width="200" style={{display: 'block', margin: 'auto'}}/>
             </AddUserCard>
           </UserCardContainer>
       
