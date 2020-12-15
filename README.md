@@ -1,46 +1,34 @@
-# Getting Started with Create React App 
+# Intera Test [![Build Status](https://circleci.com/gh/bncunha/intera-test.svg?style=shield)](https://app.circleci.com/pipelines/github/bncunha/intera-test) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/bncunha/intera-test)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este um sistema para que os Talentos possam compartilhar informações sobre a seus conhecimentos, experiências e dados pessoais com o Time Intera.
 
-## Available Scripts
+## Demo 
+Você pode visualizar a [aplicação em produção aqui.](https://happy-ardinghelli-7b939a.netlify.app/)
 
-In the project directory, you can run:
+## Metodologia
+- ✔️ Criar um design base no Figma.
+- ✔️ Criar uma aplicação utilizando React.
+- ✔️ Integrar com o Linkedin para recuperar dados básicos. 
+- ✔️ Utilizar Integração Contínua para automatizar os deploys.
+- ✔️ Criar testes A/B utilizando Google Optmize
 
-### `yarn start`
+	### Criar um design base no Figma
+	O primeiro passo foi criar um layout para me basear, tentando utilizar o mesmo padrão encontrado nos sites da Intera. Você pode visualizar como ficou no [Figma](https://www.figma.com/file/FJea220f8UwwfRTqnsbzCP/Untitled?node-id=0%3A1).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+	### Criar uma aplicação utilizando React
+	A aplicação foi criada utilizando Create-React-App, Styled-Components, e React-Dom para as rotas.
+	
+	Para utilizar localmente basta instalar os pacotes com o comando `yarn install` e depois iniciá-la com `yarn start`. Para buildar para produção basta rodar `yarn build`.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+	Uma das exigências do teste era que o usuário pudesse recuperar dados básicos (como nome e foto) do seu linkedin utilizando uma api. A Integração com a API foi feita utilizando um microservice em Node.js, que fosse a ponte de comunicação entre a aplicação e o Linkedin. Este microservice está hospedado no Heroku e pode acessar seu repositório [bncunha/intera-test-backend (github.com)](https://github.com/bncunha/intera-test-backend).
+	
+	### CI/CD com CircleCI e Netlify
+	Para otimizar o processo de deploy foi utilizado o CircleCi que faz o build da aplicação, realiza alguns testes e por fim aciona um Hook para o Netlify buildar a aplicação e publicá-la.
 
-### `yarn test`
+	### Testes A/B com Google Optimize
+	Fiz uma pequena variação na página inicial do card para demonstrar o teste A/B, na variação foi feito uma pequena alteração na barra de pesquisa e no card do usuário.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Conclusão
+Foi bem desafiador realizar o deploy automático da aplicação, já tinha estudado um pouco sobre, mas nunca havia realmente colocado em prática. Espero que tenha conseguido atingir todos os objetivos e aprender cada vez mais.
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Um sorriso de orelha a orelha! 😊
